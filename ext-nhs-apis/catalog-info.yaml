@@ -2,7 +2,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: external-nhs-apis
+  name: ext-nhs-api  
   description: External NHS APIs
 spec:
   owner: development
