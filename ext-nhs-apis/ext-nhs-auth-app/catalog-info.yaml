@@ -1,13 +1,13 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: ext-nhs-pds-api
-  description: External NHS PDS API components
+  name: ext-nhs-auth-app
+  description: External NHS API components
   labels:
     category: external
-    sub-category: nhs-api
+    sub-category: nhs-api    
   annotations:
-    github.com/project-slug: backstage-demo-26/backstage-custom-code/ext-apis/ext-nhs-pds-api
+    github.com/project-slug: backstage-demo-26/backstage-custom-code/ext-nhs-apis/ext-nhs-auth-app
     backstage.io/techdocs-ref: dir:.
 spec:
   type: service
@@ -15,17 +15,18 @@ spec:
   system: ext-nhs-api  
   lifecycle: production
   providesApis:
-    - ext-nhs-pds-api
+    - ext-nhs-access-token-api
 
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: ext-pds-fhir
-  description: NHS API for PDS tracing
+  name: ext-nhs-access-token-api
+  description: NHS Application Restricted Access Token interface
 spec:
   type: openapi
   lifecycle: production
   owner: development
   definition:
-    $text: ./openapi/ext-pds-fhir.yaml
+    $text: ./openapi/ext-auth-app-restricted.yaml
+
