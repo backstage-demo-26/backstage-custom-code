@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: monorepo-components-root
+  description: Automatically aggregates all nested component yaml files via glob loops
+spec:
+  targets:
+    - ./ext-nhs-apis/catalog-info.yaml
+    # Single asterisk tracks all immediate subfolders
+    - ./ext-nhs-apis/*/catalog-info.yaml
+    # Double asterisk recursively crawls deeply nested folders
+    # - ./packages/**/catalog-info.yaml

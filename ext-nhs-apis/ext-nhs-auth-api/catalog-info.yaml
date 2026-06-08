@@ -1,0 +1,32 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ext-nhs-auth-api
+  description: External NHS API components
+  labels:
+    category: external
+    sub-category: nhs-api    
+  annotations:
+    github.com/project-slug: backstage-demo-26/backstage-custom-code/ext-nhs-apis/ext-nhs-auth-api
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  owner: development
+  system: ext-nhs-api  
+  lifecycle: production
+  providesApis:
+    - ext-nhs-access-token-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: ext-nhs-access-token-api
+  description: NHS Application Restricted Access Token interface
+spec:
+  type: openapi
+  lifecycle: production
+  owner: development
+  definition:
+    $text: ./openapi/auth-app-restricted.yaml
+

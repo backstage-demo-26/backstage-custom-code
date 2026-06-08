@@ -1,0 +1,89 @@
+openapi: 3.0.3
+info:
+  title: NHS Access Token API : Application-restricted RESTful APIs - signed JWT authentication
+  version: 1.0.0
+  description: |
+    ## Overview 
+    Use this API to generate access token for PDS, Patient Flags, GP connect structured, NRL.
+    Details available at https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation/application-restricted-restful-apis-signed-jwt-authentication#step-5-get-an-access-token
+servers:
+  - url: https://sandbox.api.service.nhs.uk/oauth2
+    description: Sandbox environment.
+  - url: https://int.api.service.nhs.uk/oauth2
+    description: Integration test environment.
+  - url: https://api.service.nhs.uk/oauth2
+    description: Production environment.
+paths:
+  /token:
+    post:
+      summary: Request for access token
+      operationId: post-token
+      description: |
+        Use this endpoint to request for app restricted access token using signed jwt
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              description: Insurance or medical plan or a payment agreement
+              type: object
+              required:
+                - grant_type
+                - client_assertion_type
+                - client_assertion
+              properties:
+                grant_type:
+                  type: string
+                  enum:
+                    - client_credentials
+                  example: client_credentials
+                client_assertion_type:
+                  type: string
+                  enum:
+                    - urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+                  example: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+                client_assertion:
+                  type: string
+                  description: jwt token generated using KID, API KEY and private key assigned for the application
+                  example: eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCIsImtpZCI6Im5ybDMtdGVzdC1jIn0.eyJleHAiOjE3ODA5MDM3MDEsImlzcyI6InhHMUFoaXozNW5ZVG9XY01HMWw0VEQ2TnI0MEVPSmNsIiwic3ViIjoieEcxQWhpejM1bllUb1djTUcxbDRURDZOcjQwRU9KY2wiLCJhdWQiOiJodHRwczovL2ludC5hcGkuc2VydmljZS5uaHMudWsvb2F1dGgyL3Rva2VuIiwianRpIjoiMTQ0LWE1cnZwMm4wa2liLTE3ODA5MDM1ODEzMDAifQ.L9hw38cUlmrfVGsQmkV5Wi7Wru2L2DmMgBiLoOuDmoOY-1kfsA06yhNVHoydbjTXA8XcVCWTaExBHKWWLJfN7eCOWh60nLjoy9UxBqFuO55Gae3mDEGI6gk9NTo1LQ2RrgZ79frbyXdso3Oo3rM7AYIhf-DDO83KXqoCEgrcdT0bgNF72yitAJXt6GNwYS1UWGKd29dTHT9lCRWMaH5UHQSZQP8MSbcdSs3lWfx7pbVCjfSKaHmWIoPQtKTyXe_IerUqJSHVugdQSruNJpAZAfV8AXZqYGY1185TA5V4ZdCDWu9hATbmMMQM7CRa75CP8NEv6b_OCW7iZpN9eAB6CUmSEzPEVQFIReYgg-7zWghQSQO6FVWH9np19fSfGp9DXfLwXYSTM5niUYFi9WblMYXdxVj8vphVW1OraWN2yBPJx6p0huRGNn9TNUAqxIUWxRDzVgTfPVicH-lrB1Mm-2wWmooPQOG7P6tfaQpPinUmgSrUaN0uz2DbnGWZ_AzgI5cm6v1zI5YXQlz0k8uY7NCCkJYz0FEnubcgq-jKEmPU2Zgvdf6YO0k_zgwAWwVI_iZI9ii9wQE5ZJgt_FlfnsAFGTudsdhPUk40VapH4Ye_fIs3i0XewVzlro34x4C-6BYrgLf17LaUQ-18O_-ygWMC98iyeEm4LuGS7WtX8r4
+      responses:
+        "200":
+          headers:
+            nhsd-correlation-id:
+              schema:
+                type: string
+                example: 11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA
+              description: >
+                The X-Correlation-ID from the request header, if supplied,
+                mirrored back.
+            nhsd-request-id:
+              schema:
+                type: string
+                pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                example: 60E0B220-8136-4CA5-AE46-1D97EF59D068
+              description: >
+                The X-Request-ID from the request header, if supplied, mirrored
+                back.
+          content:
+            application/fhir+json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: Opaque access token.
+                    example: oUmQN6ZogGrAPftcvi16zXvux8P2
+                  expires_in:
+                    type: string
+                    description: Expiration interval in seconds
+                    default: 599
+                  token_type:
+                    type: string
+                    description: Defaults to Bearer
+                    default: Bearer
+                  issued_at:
+                    type: integer
+                    description: Time the token was issued in Unix epoch timestamp format in milliseconds.
+                    format: int64
+                    example: 1780903594597
+                

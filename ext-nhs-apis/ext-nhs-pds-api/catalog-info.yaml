@@ -1,0 +1,31 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ext-nhs-pds-api
+  description: External NHS PDS API components
+  labels:
+    category: external
+    sub-category: nhs-api
+  annotations:
+    github.com/project-slug: backstage-demo-26/backstage-custom-code/ext-apis/ext-nhs-pds-api
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  owner: development
+  system: ext-nhs-api  
+  lifecycle: production
+  providesApis:
+    - ext-nhs-pds-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: ext-pds-fhir
+  description: NHS API for PDS tracing
+spec:
+  type: openapi
+  lifecycle: production
+  owner: development
+  definition:
+    $text: ./openapi/ext-pds-fhir.yaml
