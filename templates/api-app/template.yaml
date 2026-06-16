@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: api-app-py-template
-  title: Python flask API App template v5
+  title: Python flask API App template v1
   description: Provisions a minimalistic api app python flask application
 spec:
   owner: development
@@ -42,7 +42,7 @@ spec:
       action: publish:github
       input:
         description: This is ${{ parameters.component_id }}
-        repoUrl: github.com?owner=satish-graphnet&repo=${{parameters.component_id}}
+        repoUrl: github.com?owner=backstage-demo-26&repo=${{parameters.component_id}}
         protectDefaultBranch: false
         repoVisibility: public
 
