@@ -1,0 +1,31 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: photia-nhs-pds-app
+  description: Wrapper NHS PDS API components
+  labels:
+    category: photia
+    sub-category: nhs-api
+  annotations:
+    github.com/project-slug: backstage-demo-26/backstage-custom-code/photia-nhs-apps/photia-nhs-pds-app
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  owner: development
+  system: photia-nhs-apps
+  lifecycle: production
+  providesApis:
+    - photia-nhs-pds-api
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: photia-nhs-pds-api
+  description: Photia NHS API for PDS tracing
+spec:
+  type: openapi
+  lifecycle: production
+  owner: development
+  definition:
+    $text: ./openapi/ext-pds-fhir.yaml

@@ -5,14 +5,14 @@ metadata:
   description: External NHS API components
   labels:
     category: external
-    sub-category: nhs-api    
+    sub-category: nhs-apps
   annotations:
-    github.com/project-slug: backstage-demo-26/backstage-custom-code/ext-nhs-apis/ext-nhs-auth-app
+    github.com/project-slug: backstage-demo-26/backstage-custom-code/ext-nhs-apps/ext-nhs-auth-app
     backstage.io/techdocs-ref: dir:.
 spec:
   type: service
   owner: development
-  system: ext-nhs-api  
+  system: ext-nhs-apps
   lifecycle: production
   providesApis:
     - ext-nhs-access-token-api

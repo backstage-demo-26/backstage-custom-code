@@ -5,8 +5,8 @@ metadata:
   description: Automatically aggregates all nested component yaml files via glob loops
 spec:
   targets:
-    - ./ext-nhs-apis/catalog-info.yaml
+    # - ./*/catalog-info.yaml
     # Single asterisk tracks all immediate subfolders
-    - ./ext-nhs-apis/*/catalog-info.yaml
+    # - ./*/*/catalog-info.yaml
     # Double asterisk recursively crawls deeply nested folders
-    # - ./packages/**/catalog-info.yaml
+    - ./**/catalog-info.yaml

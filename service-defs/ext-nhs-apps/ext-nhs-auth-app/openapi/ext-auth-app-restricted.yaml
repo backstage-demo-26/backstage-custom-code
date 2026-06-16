@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: NHS Access Token API : Application-restricted RESTful APIs - signed JWT authentication
-  version: 1.0.0
+  version: v1.3.455-alpha
   description: |
     ## Overview 
     Use this API to generate access token for PDS, Patient Flags, GP connect structured, NRL.
