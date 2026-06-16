@@ -7,6 +7,12 @@ on:
     branches:
       - main
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{values.app_name}}
+  ORG_NAME: backstage-demo-26
+  APP_ENV: ${{values.app_env}}
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -20,14 +26,17 @@ jobs:
         name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ '${{ secrets.DOCKERHUB_USERNAME }}' }}
-          password: ${{ '${{ secrets.DOCKERHUB_TOKEN }}' }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.GH_TOKEN }}
       -
         name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: backstage-demo-26/${{values.app_name}}:${{ '${{ env.COMMIT_ID }}' }}
+          tags: ${{ env.REGISTRY }}/${{ env.ORG_NAME }}/${{ env.IMAGE_NAME }}:${{ env.COMMIT_ID }}
+          secrets: |
+             "API_KEY=${{ secrets.API_KEY }}"
     outputs:
       commit_id: ${{ '${{ env.COMMIT_ID }}' }}
 
@@ -71,22 +80,22 @@ jobs:
         run: |
 
           # Connects the argocd repo
-          repo="https://github.com/backstage-demo-26/${{values.app_name}}.git"
-          argocd repo list | grep -q $repo || argocd repo add $repo
+          repo="https://github.com/${{ env.ORG_NAME }}/${{ env.IMAGE_NAME }}.git"
+          argocd repo add $repo --name ${{ env.IMAGE_NAME }} --upsert
 
           # Creates the argocd app
-          argocd app get ${{values.app_name}} || argocd app create ${{values.app_name}} \
+          argocd app create ${{ env.IMAGE_NAME }} \
             --repo $repo \
-            --path charts/${{values.app_name}} \
-            --dest-namespace ${{values.app_env}} \
+            --path charts/${{ env.IMAGE_NAME }} \
+            --dest-namespace ${{ env.APP_ENV }} \
             --dest-server https://kubernetes.default.svc \
-            --values values-${{values.app_env}}.yaml \
-            --revision main \
+            --values values.yaml \
             --sync-policy manual \
-            --sync-option CreateNamespace=true
+            --sync-option CreateNamespace=true \
+            --upsert
 
       - name: Argocd app sync
         shell: bash
         run: |
-          argocd app sync ${{values.app_name}}
-          argocd app wait ${{values.app_name}} --timeout 180
+          argocd app sync ${{ env.IMAGE_NAME }}
+          argocd app wait ${{ env.IMAGE_NAME }} --timeout 180
