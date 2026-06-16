@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: python-template
-  title: Python flask template
-  description: Provisions a minimalistic flask application
+  name: api-app-py-template
+  title: API App : Python flask template
+  description: Provisions a minimalistic api app python flask application
 spec:
   owner: development
   type: service
