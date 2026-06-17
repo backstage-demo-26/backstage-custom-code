@@ -26,17 +26,17 @@ jobs:
         name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ secrets.GH_USERNAME }}
-          password: ${{ secrets.GH_TOKEN }}
+          registry: ${{ '${{ env.REGISTRY }}' }}
+          username: ${{ '${{ secrets.GH_USERNAME }}' }}
+          password: ${{ '${{ secrets.GH_TOKEN }}' }}
       -
         name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.ORG_NAME }}/${{ env.IMAGE_NAME }}:${{ env.COMMIT_ID }}
+          tags: ${{ '${{ env.REGISTRY }}' }}/${{ '${{ env.ORG_NAME }}' }}/${{ '${{ env.IMAGE_NAME }}' }}:${{ '${{ env.COMMIT_ID }}' }}
           secrets: |
-             "API_KEY=${{ secrets.API_KEY }}"
+             "API_KEY=${{ '${{ secrets.API_KEY }}' }}"
     outputs:
       commit_id: ${{ '${{ env.COMMIT_ID }}' }}
 
@@ -80,14 +80,14 @@ jobs:
         run: |
 
           # Connects the argocd repo
-          repo="https://github.com/${{ env.ORG_NAME }}/${{ env.IMAGE_NAME }}.git"
-          argocd repo add $repo --name ${{ env.IMAGE_NAME }} --upsert
+          repo="https://github.com/${{ '${{ env.ORG_NAME }}' }}/${{ '${{ env.IMAGE_NAME }}' }}.git"
+          argocd repo add $repo --name ${{ '${{ env.IMAGE_NAME }}' }} --upsert
 
           # Creates the argocd app
-          argocd app create ${{ env.IMAGE_NAME }} \
+          argocd app create ${{ '${{ env.IMAGE_NAME }}' }} \
             --repo $repo \
-            --path charts/${{ env.IMAGE_NAME }} \
-            --dest-namespace ${{ env.APP_ENV }} \
+            --path charts/${{ '${{ env.IMAGE_NAME }}' }} \
+            --dest-namespace ${{ '${{ env.APP_ENV }}' }} \
             --dest-server https://kubernetes.default.svc \
             --values values.yaml \
             --sync-policy manual \
@@ -97,5 +97,5 @@ jobs:
       - name: Argocd app sync
         shell: bash
         run: |
-          argocd app sync ${{ env.IMAGE_NAME }}
-          argocd app wait ${{ env.IMAGE_NAME }} --timeout 180
+          argocd app sync ${{ '${{ env.IMAGE_NAME }}' }}
+          argocd app wait ${{ '${{ env.IMAGE_NAME }}' }} --timeout 180
