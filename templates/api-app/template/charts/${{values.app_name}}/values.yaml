@@ -3,7 +3,8 @@ image:
   repository: ghcr.io/backstage-demo-26/${{values.app_name}}
   pullPolicy: IfNotPresent
   tag: ${{values.app_name}}-${{values.app_env}}-latest
-imagePullSecrets: []
+imagePullSecrets:
+  - name: github-auth
 nameOverride: ""
 fullnameOverride: ""
 podAnnotations: {}

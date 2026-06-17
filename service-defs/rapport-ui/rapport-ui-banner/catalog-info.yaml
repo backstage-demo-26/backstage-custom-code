@@ -1,0 +1,42 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: rapport-ui-banner
+  description: Rapport UI Banner component
+  labels:
+    category: rapport-ui
+    sub-category: rapport-ui-banner
+  annotations:
+    github.com/project-slug: backstage-demo-26/backstage-custom-code/rapport-ui/rapport-ui-banner
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  owner: development
+  system: photia-nhs-apps
+  lifecycle: production
+  providesApis:
+    - rapport-ui-banner-pds-trace
+    - rapport-ui-banner-demographics
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: rapport-ui-banner-pds-trace
+  description: Photia NHS API for PDS tracing
+spec:
+  type: openapi
+  lifecycle: production
+  owner: development
+  consumesApis: 
+    - photia-nhs-pds-api 
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: rapport-ui-banner-demographics
+  description: Photia NHS API for PDS tracing
+spec:
+  type: openapi
+  lifecycle: production
+  owner: development

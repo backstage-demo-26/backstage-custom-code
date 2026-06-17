@@ -16,6 +16,8 @@ spec:
   lifecycle: production
   providesApis:
     - photia-nhs-pds-api
+  consumesApis:
+    - ext-nhs-pds-api
 
 ---
 apiVersion: backstage.io/v1alpha1

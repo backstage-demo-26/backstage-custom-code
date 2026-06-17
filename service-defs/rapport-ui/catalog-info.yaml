@@ -1,0 +1,8 @@
+# 1. The Overarching Domain Boundary Grouping
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: rapport-ui
+  description: Rapport UI components
+spec:
+  owner: development
