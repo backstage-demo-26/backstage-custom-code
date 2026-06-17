@@ -94,7 +94,7 @@ jobs:
             --path charts/${{ '${{ env.IMAGE_NAME }}' }} \
             --dest-namespace ${{ '${{ env.APP_ENV }}' }} \
             --dest-server https://kubernetes.default.svc \
-            --values values-${{values.app_env}}.yaml \ \
+            --values values-${{values.app_env}}.yaml \
             --sync-policy manual \
             --sync-option CreateNamespace=true \
             --upsert
