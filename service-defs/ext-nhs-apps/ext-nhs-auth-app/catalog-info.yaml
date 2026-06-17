@@ -12,7 +12,7 @@ metadata:
 spec:
   type: service
   owner: development
-  system: ext-nhs-apps
+  # system: ext-nhs-apps
   lifecycle: production
   providesApis:
     - ext-nhs-access-token-api
