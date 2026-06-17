@@ -4,9 +4,6 @@ from hmac import compare_digest
 import time
 import socket 
 
-from helper import config, request_nhs_token
-
-
 app = Flask(__name__)
 
 # -----------------------------
@@ -19,8 +16,10 @@ def require_api_key(f):
 
         if not provided_key:
             return jsonify({"error": "API key missing"}), 401
+			
+        api_key=os.environ.get("API_KEY", "my_default_local_secret"),
 
-        if not compare_digest(provided_key, config.api_key):
+        if not compare_digest(provided_key, api_key):
             return jsonify({"error": "Invalid API key"}), 403
 
         return f(*args, **kwargs)

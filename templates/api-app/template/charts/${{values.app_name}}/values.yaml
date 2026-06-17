@@ -29,11 +29,11 @@ resources:
     memory: 50M
 livenessProbe:
   httpGet:
-    path: /api/v1/healthz
+    path: /api/${{values.app_name}}/v1/healthz
     port: http
 readinessProbe:
   httpGet:
-    path: /api/v1/healthz
+    path: /api/${{values.app_name}}/v1/healthz
     port: http
 autoscaling:
   enabled: false
