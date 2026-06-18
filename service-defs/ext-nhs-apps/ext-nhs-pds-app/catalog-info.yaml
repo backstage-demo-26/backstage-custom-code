@@ -3,6 +3,8 @@ kind: Component
 metadata:
   name: ext-nhs-pds-app
   description: External NHS PDS API components
+  tags:
+    - c2
   labels:
     category: external
     sub-category: nhs-api

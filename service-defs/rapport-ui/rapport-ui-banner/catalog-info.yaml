@@ -3,6 +3,9 @@ kind: Component
 metadata:
   name: rapport-ui-banner
   description: Rapport UI Banner component
+  tags:
+    - c1 
+    - c2 
   labels:
     category: rapport-ui
     sub-category: rapport-ui-banner

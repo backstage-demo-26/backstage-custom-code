@@ -3,6 +3,9 @@ kind: Component
 metadata:
   name: photia-nhs-pds-app
   description: Wrapper NHS PDS API components
+  tags:
+    - c1 
+    - c2 
   labels:
     category: photia
     sub-category: nhs-api
