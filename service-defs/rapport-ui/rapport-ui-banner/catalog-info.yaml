@@ -17,6 +17,8 @@ spec:
   providesApis:
     - rapport-ui-banner-pds-trace
     - rapport-ui-banner-demographics
+  consumesApis: 
+    - photia-nhs-pds-api     
 
 ---
 apiVersion: backstage.io/v1alpha1
