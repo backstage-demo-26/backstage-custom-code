@@ -12,7 +12,7 @@ metadata:
 spec:
   type: service
   owner: development
-  # system: photia-nhs-apps
+  system: pds-trace-ui-flow
   lifecycle: production
   providesApis:
     - rapport-ui-banner-pds-trace

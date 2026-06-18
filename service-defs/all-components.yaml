@@ -10,3 +10,4 @@ spec:
     # - ./*/*/catalog-info.yaml
     # Double asterisk recursively crawls deeply nested folders
     - ./**/catalog-info.yaml
+    - ./systems/catalog-info-*.yaml

@@ -12,7 +12,7 @@ metadata:
 spec:
   type: service
   owner: development
-  # system: ext-nhs-apps  
+  system: pds-trace-ui-flow
   lifecycle: production
   providesApis:
     - ext-nhs-pds-api

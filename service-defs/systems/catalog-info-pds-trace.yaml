@@ -1,0 +1,8 @@
+# 1. The Overarching System Boundary Grouping
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: pds-trace-ui-flow
+  description: PDS trace UI flow
+spec:
+  owner: architecture
