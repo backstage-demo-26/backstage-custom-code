@@ -22,6 +22,7 @@ spec:
     - rapport-ui-banner-demographics
   consumesApis: 
     - photia-nhs-pds-api     
+    - cc-api-demo
 
 ---
 apiVersion: backstage.io/v1alpha1

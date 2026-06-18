@@ -1,0 +1,33 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: cc-demographics-app
+  description: Wrapper NHS PDS API components
+  tags:
+    - c1 
+    - c2 
+  labels:
+    category: photia
+    sub-category: nhs-api
+  annotations:
+    github.com/project-slug: backstage-demo-26/backstage-custom-code/cc-api-apps/cc-demographics-app
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  owner: development
+  lifecycle: production
+  providesApis:
+    - cc-api-demo
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: cc-api-demo
+  description: Photia NHS API for PDS tracing
+spec:
+  type: openapi
+  lifecycle: production
+  owner: development
+  definition:
+    $text: ./openapi/cc-api-demo.yaml
