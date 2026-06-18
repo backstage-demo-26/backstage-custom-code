@@ -4,5 +4,8 @@ kind: System
 metadata:
   name: pds-trace-ui-flow
   description: PDS trace UI flow
+  annotations:
+    github.com/project-slug: backstage-demo-26/backstage-custom-code/service-defs/systems
+    backstage.io/techdocs-ref: dir:.
 spec:
   owner: architecture
