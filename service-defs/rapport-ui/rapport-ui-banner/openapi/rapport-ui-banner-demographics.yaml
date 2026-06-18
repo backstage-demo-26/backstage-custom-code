@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  version: v1.3.455-alpha
+  title: Personal Demographics Service (FHIR) API
+  description: |
+    ## Overview 
+    Use this API provides a wrapper around NHS PDS trace API
+
+    This API is accessed using CareCentric or Photia or Keycloak token 
+    * search for patients
+    * get patient details
+
+
+    You can read and update the following data:
+    * NHS number (read only)
+    * name
+
+    ## Change version 
+
+servers:
+  - url: https://sandbox.api.service.nhs.uk/personal-demographics/FHIR/R4
+    description: Sandbox environment.
+paths:
+  /Patient/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: The patient's NHS number. The primary identifier of a patient,
+          unique within NHS England and Wales. Always 10 digits and must be a
+          [valid NHS
+          number](https://www.datadictionary.nhs.uk/attributes/nhs_number.html).
+        required: true
+        schema:
+          type: string
+          example: "9000000009"
+      - in: header
+        name: Authorization
+        description: |
+          An [OAuth 2.0 bearer token](https://digital.nhs.uk/developer/guides-and-documentation/security-and-authorisation#user-restricted-apis).
+
+          Required in all environments except sandbox.
+        required: false
+        schema:
+          type: string
+          format: ^Bearer\ [[:ascii:]]+$
+          example: Bearer g1112R_ccQ1Ebbb4gtHBP1aaaNM
+    get:
+      description: |+
+        ## Overview
+        Use this endpoint to get patient details from PDS for a given NHS number.
+          
+      summary: Get patient details
+      operationId: get-patient
+      responses:
+        "200":
+          description: Information successfully returned.
+components:
+  headers:
+    X-Correlation-Id:
+      schema:
+        type: string
+        example: 11C46F5F-CDEF-4865-94B2-0EE0EDCC26DA
+      description: >
+        The X-Correlation-ID from the request header, if supplied, mirrored back.
+  parameters:
+    Id:
+      name: id
+      in: path
+      description: The patient's NHS number. The primary identifier of a patient,
+        unique within NHS England and Wales. Always 10 digits and must be a
+        [valid NHS
+        number](https://www.datadictionary.nhs.uk/attributes/nhs_number.html).
+      required: true
+      schema:
+        type: string
+        example: "9000000009"

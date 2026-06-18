@@ -30,4 +30,4 @@ spec:
   lifecycle: production
   owner: development
   definition:
-    $text: ./openapi/ext-pds-fhir.yaml
+    $text: ./openapi/photia-nhs-pds-api.yaml

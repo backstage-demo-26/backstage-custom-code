@@ -30,6 +30,8 @@ spec:
   owner: development
   consumesApis: 
     - photia-nhs-pds-api 
+  definition:
+    $text: ./openapi/rapport-ui-banner-pds-trace.yaml
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
@@ -40,3 +42,5 @@ spec:
   type: openapi
   lifecycle: production
   owner: development
+  definition:
+    $text: ./openapi/rapport-ui-banner-demographics.yaml
